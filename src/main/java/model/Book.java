@@ -3,9 +3,15 @@ package model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 @Entity
-public class Book {
+public class Book implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue
     private Long id;
     private String isbn;
     private String title;
@@ -17,15 +23,6 @@ public class Book {
         this.isbn = isbn;
         this.title = title;
         this.author = author;
-    }
-
-    @Override
-    public String toString() {
-        return "Book{" +
-                "isbn='" + isbn + '\'' +
-                ", title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                '}';
     }
 
     public String getIsbn() {
@@ -52,13 +49,20 @@ public class Book {
         this.author = author;
     }
 
-    @Id
-    @GeneratedValue
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+               "isbn='" + isbn + '\'' +
+               ", title='" + title + '\'' +
+               ", author='" + author + '\'' +
+               '}';
     }
 }
