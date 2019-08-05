@@ -4,7 +4,7 @@ import model.Book;
 
 public interface BookDao {
 
-    public void save(Book book);
-    public Book get(Long id);
-    public void cleanUp();
+    void save(Book book);
+    Book get(Long id);
+    void cleanUp();
 }
