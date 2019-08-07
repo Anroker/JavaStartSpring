@@ -1,7 +1,10 @@
 package App;
 
 import App.dao.BookDao;
+import App.dao.UserDao;
 import App.model.Book;
+import App.model.User;
+import App.model.UserDetails;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -33,7 +36,34 @@ public class Main {
         System.out.println("Book that was removed: " + book2);
 
         //context.close();
-        contextBoot.close();
+
+
+
+        UserDao userDao = contextBoot.getBean(UserDao.class);
+        User user = new User("johnny234", "strongPass", "johnny@gmail.com");
+
+        userDao.save(user);
+
+
+        UserDetails details = new UserDetails("John", "Kowalski", "Krakowska 55, Warszawa");
+        user.setUserDetails(details);
+        userDao.update(user);
+
+
+        user.setPassword("passPass");
+        user.getUserDetails().setFirstName("Piotr");
+        userDao.update(user);
+
+
+        User userFromDb = userDao.get(1L);
+        System.out.println(userFromDb);
+
+
+        userDao.remove(user);
+
+
+        userFromDb = userDao.get(1L);
+        System.out.println(userFromDb);
     }
 
 
