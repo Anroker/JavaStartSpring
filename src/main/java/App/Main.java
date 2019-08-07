@@ -5,9 +5,6 @@ import App.model.Book;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 
 @SpringBootApplication
 public class Main {
@@ -22,10 +19,19 @@ public class Main {
         //bookDao.save(book);
         daoBoot.save(book);
 
-        System.out.println("Book saved");
 
-        //System.out.println(bookDao.get(1L));
-        System.out.println(daoBoot.get(1L));
+        Book book1 = new Book("0987654321112", "New Book For Spring Boog", "Marcin Głąb");
+        book1.setId(1L);
+        daoBoot.update(book1);
+
+        Book findBook = daoBoot.get(1L);
+        System.out.println("Book that was get: " + findBook);
+
+        daoBoot.delete(1L);
+        Book book2 = daoBoot.get(1L);
+
+        System.out.println("Book that was removed: " + book2);
+
         //context.close();
         contextBoot.close();
     }
