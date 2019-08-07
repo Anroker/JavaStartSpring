@@ -17,7 +17,20 @@ public class BookDaoImpl implements BookDao {
         entityManager.persist(book);
     }
 
-    public Book get(Long id) {
-        return entityManager.find(Book.class, id);
+    public Book get(Long bookID) {
+        return entityManager.find(Book.class, bookID);
+    }
+
+    @Override
+    @Transactional
+    public void update(Book book) {
+        //objects need to have master key
+        entityManager.merge(book);
+    }
+
+    @Override
+    @Transactional
+    public void delete(Long bookID) {
+        entityManager.remove(entityManager.find(Book.class, bookID));
     }
 }
