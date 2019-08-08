@@ -2,6 +2,7 @@ package App;
 
 import App.dao.BookDao;
 import App.dao.UserDao;
+import App.dao.UserDetailsDao;
 import App.model.Book;
 import App.model.User;
 import App.model.UserDetails;
@@ -59,11 +60,15 @@ public class Main {
         System.out.println(userFromDb);
 
 
-        userDao.remove(user);
+       // userDao.remove(user);
 
 
         userFromDb = userDao.get(1L);
         System.out.println(userFromDb);
+
+        UserDetailsDao userDetailsDao = contextBoot.getBean(UserDetailsDao.class);
+        UserDetails userDetails = userDetailsDao.get(1L);
+        System.out.println("UserDetails: " + userDetails.getUser());
     }
 
 
