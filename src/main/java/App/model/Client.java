@@ -24,8 +24,8 @@ public class Client implements Serializable {
     @Column(nullable = false)
     private String address;
 
-    @OneToMany
-    @JoinColumn(name = "client_id", referencedColumnName = "client_id")
+    @OneToMany(mappedBy = "client")
+    //@JoinColumn(name = "client_id", referencedColumnName = "client_id")
     private List<Order> orders;
 
     public Client() {
