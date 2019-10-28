@@ -13,6 +13,27 @@ public class Main {
         //AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
         ConfigurableApplicationContext contextBoot = SpringApplication.run(Main.class, args);
 
+        Client client = new Client("Jan", "Kowalski", "Krakowskie przedmieście 23, Warszawa");
+        ClientDao clientDao = contextBoot.getBean(ClientDao.class);
+        clientDao.save(client);
+
+        Order order = new Order("z dostawą do domu");
+        order.setClient(client);
+        OrderDao orderDao = contextBoot.getBean(OrderDao.class);
+        orderDao.save(order);
+
+        Product product1 = new Product("Telewizor LG 42'", 4800.0, "dolby surround");
+        Product product2 = new Product("Telefon Apple iPhone SE", 2200.0, "pokrowiec gratis");
+        ProductDao productDao = contextBoot.getBean(ProductDao.class);
+        productDao.save(product1);
+        productDao.save(product2);
+
+        orderDao.addProductsToOrder(order.getId(), product1, product2);
+
+        Client getClient = clientDao.get(client.getId());
+        System.out.println("\n"+getClient);
+
+
 //        Client client = new Client("Marcin", "Glab","City 54, City");
 //        ClientDao clientDao = contextBoot.getBean(ClientDao.class);
 //        clientDao.save(client);

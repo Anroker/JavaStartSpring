@@ -2,11 +2,12 @@ package App.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 public class Product implements Serializable {
     private static final long serialVersionUID = 3L;
-    //One way relation
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_product")
@@ -21,6 +22,9 @@ public class Product implements Serializable {
     @Column(name = "details")
     private String details;
 
+    @ManyToMany(mappedBy = "products")
+    private List<Order> orders;
+
     public Product() {
     }
 
@@ -33,12 +37,10 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", details='" + details + '\'' +
-                '}';
+        return "Product [id=" + id
+                + ", name=" + name
+                + ", price=" + price
+                + ", details=" + details + "]";
     }
 
     public Long getId() {

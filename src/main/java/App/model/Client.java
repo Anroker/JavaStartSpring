@@ -24,7 +24,7 @@ public class Client implements Serializable {
     @Column(nullable = false)
     private String address;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     //@JoinColumn(name = "client_id", referencedColumnName = "client_id")
     private List<Order> orders;
 
@@ -79,12 +79,8 @@ public class Client implements Serializable {
 
     @Override
     public String toString() {
-        return "Client{" +
-               "id=" + id +
-               ", firstName='" + firstName + '\'' +
-               ", lastName='" + lastName + '\'' +
-               ", address='" + address + '\'' +
-               ", orders=" + orders +
-               '}';
+        return "Client [id=" + id + ", firstName=" + firstName
+                + ", lastName=" + lastName + ", address=" + address + orders.size()
+                + ",\n orders=" + orders + "]";
     }
 }
